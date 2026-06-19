@@ -1,5 +1,5 @@
 const express = require('express');
-const healthRoutes = require('./routes/healthRoutes');
+const router = require('./routes/Router.js');
 
 const app = express();
 

@@ -4,8 +4,8 @@
   "description": "API REST para la gestión de bandas musicales, álbumes y enlaces a plataformas externas utilizando Node.js, Express y Sequelize.",
   "main": "index.js",
   "scripts": {
-  "start": "node server.js",
-  "dev": "nodemon server.js"
+  "start": "node .",
+  "dev": "node --watch ."
 },
   "repository": {
     "type": "git",
