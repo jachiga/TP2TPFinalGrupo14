@@ -1,12 +1,13 @@
 {
   "name": "tp2tpfinalgrupo14",
   "version": "1.0.0",
-  "description": "API REST para la gestión de bandas musicales, álbumes y enlaces a plataformas externas utilizando Node.js, Express y Sequelize.",
-  "main": "index.js",
+  "description": "API REST para la gestion de bandas musicales y albumes utilizando Node.js, Express y Sequelize.",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-  "start": "node .",
-  "dev": "node --watch ."
-},
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jachiga/TP2TPFinalGrupo14.git"
@@ -14,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/jachiga/TP2TPFinalGrupo14/issues"
   },
@@ -25,7 +25,5 @@
     "sequelize": "^6.37.8",
     "sqlite3": "^6.0.1"
   },
-  "devDependencies": {
-    "nodemon": "^3.1.14"
-  }
+  "devDependencies": {}
 }
