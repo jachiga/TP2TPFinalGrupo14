@@ -1,59 +1,89 @@
 class BandController {
+  constructor(service) {
+    this.service = service;
+  }
 
-    constructor(service) {
-        this.service = service;
+  getAll = async (req, res) => {
+    try {
+      const bands = await this.service.getAll();
+      res.status(200).json({ success: true, data: bands });
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  };
+
+  getById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const band = await this.service.getById(id);
+
+      if (!band) {
+        return res.status(404).json({ success: false, message: "Band not found" });
+      }
+
+      return res.status(200).json({ success: true, data: band });
+    } catch (error) {
+      return this.handleError(res, error);
+    }
+  };
+
+  create = async (req, res) => {
+    const data = req.body;
+
+    if (!data.name || !data.genre) {
+      return res.status(400).json({
+        success: false,
+        message: "Name and genre are required",
+      });
     }
 
-    getAll = async (req, res) => {
-        try {
-            const bands = await this.service.getAll();
-            res.status(200).json(bands);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    };
+    try {
+      const newBand = await this.service.create(data);
+      return res.status(201).json({ success: true, data: newBand });
+    } catch (error) {
+      return this.handleError(res, error);
+    }
+  };
 
-    getById = async (req, res) => {
-        const { id } = req.params;
-        try {
-            const band = await this.service.getById(id);
-            if (!band) {
-                return res.status(404).json({ message: "Band not found" });
-            }
-            res.status(200).json(band);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    };
+  update = async (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
 
-    create = async (req, res) => {
-        const data = req.body;
-        try {
-            const newBand = await this.service.create(data);
-            res.status(201).json(newBand);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    };
+    if (!data.name || !data.genre) {
+      return res.status(400).json({
+        success: false,
+        message: "Name and genre are required",
+      });
+    }
 
-    update = async (req, res) => {
-        const { id } = req.params;
-        const data = req.body;
-        try {
-            const updatedBand = await this.service.update(id, data);
-            res.status(200).json(updatedBand);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    };
+    try {
+      const updatedBand = await this.service.update(id, data);
+      return res.status(200).json({ success: true, data: updatedBand });
+    } catch (error) {
+      return this.handleError(res, error);
+    }
+  };
 
-    delete = async (req, res) => {
-        const { id } = req.params;
-        try {
-            const deletedBand = await this.service.delete(id);
-            res.status(200).json(deletedBand);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    };
+  delete = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const deletedBand = await this.service.delete(id);
+      return res.status(200).json({ success: true, message: deletedBand.message });
+    } catch (error) {
+      return this.handleError(res, error);
+    }
+  };
+
+  handleError = (res, error) => {
+    const statusCode = error.statusCode || (error.name === "SequelizeValidationError" ? 400 : 500);
+
+    return res.status(statusCode).json({
+      success: false,
+      message: error.message || "Internal server error",
+    });
+  };
 }
+
+export default BandController;
