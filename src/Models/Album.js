@@ -1,33 +1,39 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../Connection/sequelize.js';
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../Connection/sequelize.js";
 
-
-class Album extends Model {
-    
-}
+class Album extends Model {}
 
 Album.init({
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false,
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
     },
-    year: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len: [1, 4],
-            is: /^[0-9]+$/i,
-        }
+  },
+  year: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      isInt: true,
+      min: 1,
     },
-    bandId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-            len: [1, 11],
-            is: /^[0-9]+$/i,
-        }
+  },
+  bandId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      isInt: true,
     },
+  },
 }, {
-    sequelize,
-    modelName: 'Album',
+  sequelize,
+  modelName: "Album",
 });
+
+export default Album;

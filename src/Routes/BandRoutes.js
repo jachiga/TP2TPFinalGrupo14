@@ -1,20 +1,15 @@
 import { Router } from "express";
 
+import BandController from "../Controllers/bandController.js";
+import BandService from "../Services/bandService.js";
+
 const router = Router();
+const bandController = new BandController(new BandService());
 
-// GET /api/bands
-router.get("/", (req, res) => {});
-
-// GET /api/bands/:id
-router.get("/:id", (req, res) => {});
-
-// POST /api/bands
-router.post("/", (req, res) => {});
-
-// PUT /api/bands/:id
-router.put("/:id", (req, res) => {});
-
-// DELETE /api/bands/:id
-router.delete("/:id", (req, res) => {});
+router.get("/", bandController.getAll);
+router.get("/:id", bandController.getById);
+router.post("/", bandController.create);
+router.put("/:id", bandController.update);
+router.delete("/:id", bandController.delete);
 
 export default router;

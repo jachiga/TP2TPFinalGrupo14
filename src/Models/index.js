@@ -1,15 +1,16 @@
-import Band from "./Band.js";
 import Album from "./Album.js";
+import Band from "./Band.js";
 
 Band.hasMany(Album, {
-    foreignKey: "bandId"
+  foreignKey: "bandId",
+  onDelete: "CASCADE",
 });
 
 Album.belongsTo(Band, {
-    foreignKey: "bandId"
+  foreignKey: "bandId",
 });
 
 export {
-    Band,
-    Album
+  Album,
+  Band,
 };
