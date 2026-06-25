@@ -23,7 +23,7 @@ class AlbumService {
     const album = await Album.findByPk(id);
 
     if (!album) {
-      const error = new Error("Album not found");
+      const error = new Error("Album no encontrado");
       error.statusCode = 404;
       throw error;
     }
@@ -36,7 +36,7 @@ class AlbumService {
     const album = await Album.findByPk(id);
 
     if (!album) {
-      const error = new Error("Album not found");
+      const error = new Error("Album no encontrado");
       error.statusCode = 404;
       throw error;
     }
@@ -44,7 +44,7 @@ class AlbumService {
     await album.destroy();
 
     return {
-      message: "Album deleted successfully",
+      message: "Album eliminado exitosamente",
     };
   }
 
@@ -52,7 +52,7 @@ class AlbumService {
     const band = await Band.findByPk(bandId);
 
     if (!band) {
-      const error = new Error("Band not found");
+      const error = new Error("Banda no encontrada");
       error.statusCode = 404;
       throw error;
     }

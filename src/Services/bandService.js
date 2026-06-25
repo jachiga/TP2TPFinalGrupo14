@@ -17,7 +17,7 @@ class BandService {
     const band = await Band.findByPk(id);
 
     if (!band) {
-      const error = new Error("Band not found");
+      const error = new Error("Banda no encontrada");
       error.statusCode = 404;
       throw error;
     }
@@ -29,7 +29,7 @@ class BandService {
     const band = await Band.findByPk(id);
 
     if (!band) {
-      const error = new Error("Band not found");
+      const error = new Error("Banda no encontrada");
       error.statusCode = 404;
       throw error;
     }
@@ -37,7 +37,7 @@ class BandService {
     await band.destroy();
 
     return {
-      message: "Band deleted successfully",
+      message: "Banda eliminada exitosamente",
     };
   }
 }
