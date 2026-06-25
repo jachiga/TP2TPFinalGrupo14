@@ -1,20 +1,15 @@
 import { Router } from "express";
 
+import AlbumController from "../Controllers/albumController.js";
+import AlbumService from "../Services/albumService.js";
+
 const router = Router();
+const albumController = new AlbumController(new AlbumService());
 
-// GET /api/bands
-router.get("/", (req, res) => {});
-
-// GET /api/bands/:id
-router.get("/:id", (req, res) => {});
-
-// POST /api/bands
-router.post("/", (req, res) => {});
-
-// PUT /api/bands/:id
-router.put("/:id", (req, res) => {});
-
-// DELETE /api/bands/:id
-router.delete("/:id", (req, res) => {});
+router.get("/", albumController.getAll);
+router.get("/:id", albumController.getById);
+router.post("/", albumController.create);
+router.put("/:id", albumController.update);
+router.delete("/:id", albumController.delete);
 
 export default router;
